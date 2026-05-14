@@ -1,0 +1,24 @@
+Kyocera -> 1101:Destination host does not exist on the network.
+Kyocera -> 1102:Login to the host has failed.
+Kyocera -> 1103:Destination host, folder, and/or file names are invalid.
+Kyocera -> 1105:SMB protocol is not enabled.
+Kyocera -> 2101:Login to the host has failed.
+Kyocera -> 2201:Writing scanned data has failed.
+Kyocera -> 2203:No response from the host during a specific period of time.
+1101 -> 1101 Windows
+1101 -> 1101 MACOS
+1101 -> 1101 Linux
+1101W1: Can you ping the device by hostname "ping (hostname)"
+1101 Windows -> 1101W1
+1101W2: Verify the device is set to "Private Network"
+1101W1 -> 1101W2: No
+1101W3: Verify "File and Printer Sharing" is enabled
+1101W2 -> 1101W3: Still cannot "ping device by hostname"
+1101W4: On target PC open Command Prompt and run "ipconfig". Take note of the IPv4 Address. Run "hostname". Take note of the hostname. Run "ping (hostname) -4" and note the IP address. Does this match the first IP Address Noted?
+1101W3 -> 1101W4:Still cannot "ping device by hostname"
+1101W5: In Command Prompt run "ipconfig /flushdns". If target goes offline wait until network restarts. If network never comes back up reboot target PC. Repeat last diagnostic step. Does "ipconfig" IP address now match IP address seen when using ping command?
+1101W4 -> 1101W5: No
+1101W6: Connection Restored- DNS Resolver Cache was Corrupted on target PC. Cleaning the local DNS cache restored connection.
+1101W5 -> 1101W6: Yes
+1101W7: The DNS cache is corrupt on the router. Altering router information is outside of our scope of work. Set the device to use the IP Address of the target and inform end user connection may fail in future unless root issue is resolved or if IP Reservation is placed on Network.
+1101W5 -> 1101W7: No
