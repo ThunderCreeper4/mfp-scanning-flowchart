@@ -1,3 +1,4 @@
+SMB -> Kyocera
 Kyocera -> 1101:Destination host does not exist on the network.
 Kyocera -> 1102:Login to the host has failed.
 Kyocera -> 1103:Destination host, folder, and/or file names are invalid.
@@ -8,17 +9,109 @@ Kyocera -> 2203:No response from the host during a specific period of time.
 1101 -> 1101 Windows
 1101 -> 1101 MACOS
 1101 -> 1101 Linux
-1101W1: Can you ping the device by hostname "ping (hostname)"
+1101W1: Verify the device is set to "Private Network".
 1101 Windows -> 1101W1
-1101W2: Verify the device is set to "Private Network"
-1101W1 -> 1101W2: No
-1101W3: Verify "File and Printer Sharing" is enabled
-1101W2 -> 1101W3: Still cannot "ping device by hostname"
+1101W2: Verify "File and Printer Sharing" is enabled.
+1101W1 -> 1101W2
+1101W3: Can you ping the device by hostname "ping (hostname)"?
+1101W2 -> 1101W3
 1101W4: On target PC open Command Prompt and run "ipconfig". Take note of the IPv4 Address. Run "hostname". Take note of the hostname. Run "ping (hostname) -4" and note the IP address. Does this match the first IP Address Noted?
-1101W3 -> 1101W4:Still cannot "ping device by hostname"
+1101W3 -> 1101W4:No
 1101W5: In Command Prompt run "ipconfig /flushdns". If target goes offline wait until network restarts. If network never comes back up reboot target PC. Repeat last diagnostic step. Does "ipconfig" IP address now match IP address seen when using ping command?
 1101W4 -> 1101W5: No
-1101W6: Connection Restored- DNS Resolver Cache was Corrupted on target PC. Cleaning the local DNS cache restored connection.
+1101W6: Issue Resolved- DNS Resolver Cache was Corrupted on target PC. Cleaning the local DNS cache restored connection.
 1101W5 -> 1101W6: Yes
-1101W7: The DNS cache is corrupt on the router. Altering router information is outside of our scope of work. Set the device to use the IP Address of the target and inform end user connection may fail in future unless root issue is resolved or if IP Reservation is placed on Network.
+1101W7: The DNS cache is corrupt on the router. Altering router data to resolve the root of the issue is outside of our scope of work.
+1101W8: Set the device to use the IP Address of the target and inform end user connection may fail in future unless root issue is resolved or if IP Reservation is placed on Network.
 1101W5 -> 1101W7: No
+1101W7 -> 1101W8
+1101W9: In Command Prompt attempt to ping the device by hostname using mDNS "ping (hostname).local". Does pinging the hostname now work?
+1101W4 -> 1101W9: Yes
+1101W10: Hostname remains unable to be resolved due to unidentifyable reason either with customer network or customer PC.
+1101W9 -> 1101W10: No
+1101W10 -> 1101W8
+1101W11: Router is unable to resolve hostnames correctly. You are able to resolve the hostname by using mDNS resolution which is a DNS broadcast that bypasses DNS. MFPs do not support mDNS so appending .local to the Hostname in the MFP will not resolve the issue. Altering router data to resolve the root of the issue is outside of our scope of work.
+1101W9 -> 1101W11: Yes
+1101W11 -> 1101W8
+1101W12: On target PC open Command Prompt and run "net share". Do you see a scan folder listed?
+1101W3 -> 1101W12: Yes
+1101W13: Issue Resolved- No Scan folder exists on PC. Create and share out a scan folder.
+1101W12 -> 1101W13: No
+1101W14: Attempt to connect to Network Share off another PC. Are you able to read and write to the scan folder?
+1101W12 -> 1101W14: Yes
+1101W15: Issue Resolved- Target PC either has issue outside our scope of work to resolve or has smb blocked by Firewall. Report findings to end user and discuss alternatives.
+1101W14 -> 1101W15: No
+1101W16: Is the device one of the following models? TASKalfa 3050ci - TASKalfa 3550ci - TASKalfa 4550ci - TASKalfa 5550ci - TASKalfa 1800 - TASKalfa 2200 - FS-1220MFP - FS-1320MFP - FS-1325MFP - FS-6025MFP - FS-6030MFP - FS-6525MFP - FS-6530MFP - FS-C8020MFP - FS-C8025MFP - FS-C8520MFP - FS-C8525MFP.
+1101W14 -> 1101W16: Yes
+1101W17: Legacy SMB (SMB 1.0) is not Supported on this model Kyocera.
+1101W18: Inform End User this is disabled by default due to a known Security Exploit (WannaCry). Inform end user this legacy service can be enabled to allow scanning, but we are not liable if issues occur as a result.
+1101W19: Search for "Turn Windows Features on or off" Scroll Down and open the dropdown for "SMB 1.0/CIFS File Sharing Support" Check both "SMB1.0/CIFS Client" and "SMB1.0/CIFS Server". Uncheck "SMB1.0/CIFS Automatic Removal". Apply the setting and restart if necessary.
+1101W20: Issue Resolved- Kyocera MFP does not support SMB2.0 or SMB 3.0 for modern Windows versions.
+1101W16 -> 1101W17: Yes
+1101W17 -> 1101W18
+1101W18 -> 1101W19: Enable legacy SMB (SMB1.0).
+1101W18 -> 1101W20: Leave legacy SMB (SMB1.0) disabled.
+1101W19 -> 1101W20
+1101W21: If the port number on the destination is set to 445, set port to 139. If the port number is set to 139, set port to 445. Does SMB work now?
+1101W16 -> 1101W21: No
+1101W22: Issue Resolved- Target PC does not listen to either port 139 or 445.
+1101W21 -> 1101W22: Yes
+1101W23: Make a full device backup and then initialize the unit. Upon connecting back to network attempt to send another scan. Does SMB work now?
+1101W21 -> 1101W23: No
+1101W24: Issue Resolved- Unidentified bug in unit that was resolved with initialization.
+1101W25: Unable to resolve source of issue. Consult with end user about alternatives.
+1101W23 -> 1101W24: Yes
+1101W23 -> 1101W25: No
+
+1102 -> 1102 Windows
+1102 -> 1102 MACOS
+1102 -> 1102 Linux
+1102W2: If is the device using a end user for the username or a scanner account?
+1102 Windows -> 1102W2
+1102W3: On target PC open Command Prompt and run "net user (username)". Is there a date next to "Password Expires:"?
+1102W2 -> 1102W3: Scanner Account
+1102W4: On target PC open Command Prompt and run "lusrmgr.msc" Do you recieve an error saying "This snap-in may not be used with this edition of Windows"
+1102W3 -> 1102W4: Yes
+1102W5: Issue Resolved- Click on Users and then right click on the scanner account and click properties. Check the box that says "Password Never Expires" and Apply settings.
+1102W4 -> 1102W5: No
+1102W6: On the target PC open Command Prompt and run "wmic". Does it return an error saying "'wmic' is not recognized as an internal or external command, operable program, or batch file."?
+1102W4 -> 1102W6: Yes
+1102W7: Issue Resolved- This PC is incompatible with any built-in utilities to disable password expiration for the scanner user account. Delete the scanner account and remake it within Windows settings and reshare out the folder with the newly created scanner account.
+1102W6 -> 1102W7: Yes
+1102W8: Issue Resolved- On target PC run 'wmic useraccount where Name="(username)" set PasswordExpires=false'. The account password has expired for the scanner account. This command will perminantly disable the password expiration for it.
+1102W6 -> 1102W8: No
+1102W9: Have end user reenter their password into address book. Does SMB work now?
+1102W2 -> 1102W9: End user account
+1102W10: Issue Resolved- End user changed account password
+1102W9 -> 1102W10: Yes
+1102W11: Unable to resolve source of authentication issue. Create a scanner account on target pc and attempt setup again.
+1102W9 -> 1102W11: No
+
+1103 -> 1103 Windows
+1103 -> 1103 MACOS
+1103 -> 1103 Linux
+1103W2: Issue Resolved- user account doesn't have full read/write permissions to the specified network share. Go to the scan folder and right click and select "Properties". Go to the "Sharing" and under both locations add the user account to the share with "Full Control" Permissions.
+1103 Windows -> 1103W2
+1103L2: Issue Resolved- user account doesn't have full read/write permissions to the specified network share. Open a terminal window on the target device and run "sudo nano /etc/samba/smb.conf" and authenticate as a valid sudoer. Scroll down to the network share and create or append the user account as a valid user on a new line. This should look like "valid users=(username)". Press Ctrl+O to save changes. Press Ctrl+X to exit nano.
+1103 Linux -> 1103L2
+
+1105F: Issue Resolved- SMB Client is disabled on MFP. Authenticate into Command Center RX (Web Interface) Go to "Network Settings". Go to "Protocol". Underneath "Send Protocols", enable "SMB".
+1105 -> 1105F
+
+2101 -> 2101 Windows
+2101 -> 2101 MACOS
+2101 -> 2101 Linux
+2101W2: Verify Hostname is correct for target device
+2101 Windows -> 2101W2
+2101W3: If port is set to 139 set port to 445. If port is set to 445 set to 139.
+2101W2 -> 2101W3
+2101W4: Attempt flow chart for 1101 and 1102 send failures if issue continues
+2101W3 -> 2101W4
+2101W4 -> 1101 Windows
+2101W4 -> 1102 Windows
+
+2201F: Likely a result of poor connection and dropping packets. If occurs when both device and MFP are hardwired reduce MFP network speed to "100Base Full Duplex" and test further.
+2201 -> 2201F
+
+2203F: Likely a result of poor connection and dropping packets. If occurs when both device and MFP are hardwired reduce MFP network speed to "100Base Full Duplex" and test further.
+2203 -> 2203F
