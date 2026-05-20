@@ -1,0 +1,56 @@
+Scan to Folder 1102 error on Windows\n-\nLogin to the host has failed.: {class: note}
+classes: {
+    step: {shape: rectangle}
+    diagnose: {shape: diamond}
+    fixed: {shape: rectangle; style: {fill: "#90FF90"; stroke: "#00A000";}}
+    failure: {shape: rectangle; style: {fill: "#FF9090"; stroke: "#A00000";}}
+    note: {shape: page;}
+}
+
+#Verify correct password is used
+1: Verify correct password for the specified username\nis used within Command Centre RX (Web Interface)
+
+#Verify user account is not expired
+2: On target PC open Command Prompt and run "net user (username)"\nDoes "Password expires" say "Never"? {class: diagnose}
+1 -> 2
+
+#Password expiration
+3: Password Expiration is enabled for user account
+2 -> 3: No
+3: {
+    #Test if Windows edition supports lusrmgr.msc
+    3-1: On the target PC open Command Prompt and run "lusrmgr.msc"\nDo you recieve and error saying "This snap-in may no be used with this edition\nof Windows?" {class: diagnose}
+
+    #Disable expiration via lusrmgr.msc
+    3-1-1: Click on Users then right click on the account used for\nscanning and click properties. Check the box that says\n"Password Never Expires" and apply settings {class: fixed}
+    3-1 -> 3-1-1: No
+
+    #Test if wmic is enabled
+    3-1-2: On the target PC open Command Prompt and run "wmic /?"\nDoes it return an error saying "'wmic' is not recognized as an internal\nor external command, operable program or batch file."? {class: diagnose}
+    3-1 -> 3-1-2: Yes
+
+    #Disable expiration via wmic
+    3-1-2-1: On the target PC open Command Prompt and run "wmic useraccount where name='(username)' set PasswordExpires=false" {class: fixed}
+    3-1-2 -> 3-1-2-1: No
+
+    #Delete user account and remake account
+    3-1-2-2: This PC is incompatible with any built-in utilities\nto disable account expiration. Delete the user account associated\nwith scanning. In Windows settings, create a new user manually. {class: fixed}
+    3-1-2 -> 3-1-2-2: Yes
+
+}
+
+#Password is not expired
+4: Password Expiration is disabled for user account
+2 -> 4: Yes
+4: {
+    #Create a dedicated scanner account
+    4-1: Create a dedicated scanner account on the PC.\nAttempt to scan with this account. Does it work now? {class: diagnose}
+
+    #Unknown authentication bug with user account
+    4-1-1: The end users account is unable to be used with\nscanning due to unidentifyable reason. Using a dedicated\nscanner account bypasses the bug with authentication {class: fixed}
+    4-1 -> 4-1-1: Yes
+
+    #Unresolveable issue with authentication
+    4-1-2: Unable to resolve the source of authentication faulure.\nDiscuss alternatives with end user {class: failure}
+    4-1 -> 4-1-2: No
+}
