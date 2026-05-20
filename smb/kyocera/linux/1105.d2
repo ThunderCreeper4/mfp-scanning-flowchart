@@ -1,0 +1,10 @@
+Scan to Folder 1105 error on Windows\n-\nSMB protocol is not enabled.: {class: note}
+classes: {
+    step: {shape: rectangle}
+    diagnose: {shape: diamond}
+    fixed: {shape: rectangle; style: {fill: "#90FF90"; stroke: "#00A000";}}
+    failure: {shape: rectangle; style: {fill: "#FF9090"; stroke: "#A00000";}}
+    note: {shape: page;}
+}
+
+1: SMB Client is disabled on MFP. Authenticate into Command Center RX (Web Interface)\nGo to "Network Settings". Go to "Protocol". Underneath "Send Protocols", enable "SMB" {class: fixed}
