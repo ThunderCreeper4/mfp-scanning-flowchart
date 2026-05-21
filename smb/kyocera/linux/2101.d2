@@ -1,0 +1,14 @@
+Scan to Folder 2101 error on Linux\n-\nLogin to the host has failed.: {class: note}
+classes: {
+    step: {shape: rectangle}
+    diagnose: {shape: diamond}
+    fixed: {shape: rectangle; style: {fill: "#90FF90"; stroke: "#00A000";}}
+    failure: {shape: rectangle; style: {fill: "#FF9090"; stroke: "#A00000";}}
+    note: {shape: page;}
+}
+
+1: Verify Hostname is correct for the target device {class: step}
+2: If port is set to 139 set port to 445. If port is set to 445 set to 139 {class: step}
+1 -> 2: Verified hostname is correct
+3: Attempt flow chart for 1101 and 1102 send failures if issue continues {class: note}
+2 -> 3: Swapped Ports
