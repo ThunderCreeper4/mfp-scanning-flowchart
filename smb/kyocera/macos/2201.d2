@@ -1,0 +1,21 @@
+Scan to Folder 2201 error on macos\n-\nWriting scanned data has failed.: {class: note}
+classes: {
+    step: {shape: rectangle}
+    diagnose: {shape: diamond}
+    fixed: {shape: rectangle; style: {fill: "#90FF90"; stroke: "#00A000";}}
+    failure: {shape: rectangle; style: {fill: "#FF9090"; stroke: "#A00000";}}
+    note: {shape: page;}
+}
+
+1: This fault is likely due to poor or instable connection across Wi-Fi\nIf this fault occurs when both the Kyocera MFP and the Mac are hardwired,\nreduce the network speed of the MFP and test further {class: step}
+1-1: |md
+1. Press "Home" button
+2. Press "System Menu"
+3. Press "Network Settings"
+4. Press "LAN Interface"
+5. Reduce Speed
+6. Reboot Unit
+| {class: note}
+1 -> 1-1
+1-1-1: Recommended speed for troubleshooting is 100BASE-TX Full\nIf needed slower recommended speed is 10BASE-T Full {class: note}
+1-1 -> 1-1-1
