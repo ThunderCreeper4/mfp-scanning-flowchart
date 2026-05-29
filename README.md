@@ -6,9 +6,8 @@ This repository contains my documented findings over the years about various dif
 
 Using d2 you can compile files indivigually, to compile all files at once see appropriate installation steps below.
 ## Windows
-> [!CAUTION]
-> Still under development.
->`compile.bat` is not currently available yet
+> [!Warning]
+> Windows support is basic. Expect minor issues when compiling.
 
 Dependencies: d2, git, go
 
