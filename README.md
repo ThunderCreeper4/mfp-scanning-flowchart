@@ -6,6 +6,7 @@ Using d2 you can compile files indivigually, to compile all files at once see ap
 > [!CAUTION]
 > Still under development.
 >`compile.bat` is not currently available yet
+
 Dependencies: d2, git, go
 
 To compile this repository on Windows run:
