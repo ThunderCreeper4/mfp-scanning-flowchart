@@ -3,13 +3,23 @@ This repository contains my documented findings over the years about various dif
 # How to Compile
 Using d2 you can compile files indivigually, to compile all files at once see appropriate installation steps below.
 ## Windows
-Not available yet
+> [!CAUTION]
+> Still under development.
+>`compile.bat` is not currently available yet
+Dependencies: d2, git, go
 
+To compile this repository on Windows run:
+```
+git clone https://github.com/ThunderCreeper4/mfp-scanning-flowchart
+cd mfp-scanning-flowchart
+compile.bat
+cd compiled
+```
 ## MACOS
 No available yet
 
 ## Linux
-Dependencies: sed, d2, git
+Dependencies: d2, git, sed
 
 To compile this repository on Linux run:
 ```
