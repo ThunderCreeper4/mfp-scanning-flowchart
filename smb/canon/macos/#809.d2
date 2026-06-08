@@ -1,0 +1,10 @@
+Scan to Folder #809 error on MACOS\n-\nWhen sending to an SMB server, a file with the same name already exists and overwriting of files is not allowed.: {class: note}
+classes: {
+    step: {shape: rectangle}
+    diagnose: {shape: diamond}
+    fixed: {shape: rectangle; style: {fill: "#90FF90"; stroke: "#00A000";}}
+    failure: {shape: rectangle; style: {fill: "#FF9090"; stroke: "#A00000";}}
+    note: {shape: page;}
+}
+
+1: File with matching filename already exists. SMB server doesn't permit overwriting files {class: fixed}
