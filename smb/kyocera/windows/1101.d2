@@ -150,6 +150,16 @@ classes: {
     | {class: note}
     5-1-1 -> 5-1-1-1: Create a folder for Scanning
 
+    #Create Scan Folder via terminal
+    5-1-1-2: |md
+    1. Open Command Prompt
+    2. Run "mkdir (path to desired folder)"
+    - Example "mkdir \Scans"
+    3. Run "net share (sharename)=(Full Path to Folder) /Grant:(Useraccount),FULL"
+    - Example "net share scans=C:\Scans /Grant:scanner,FULL"
+    | {class: note}
+    5-1-1 -> 5-1-1-2: Create a folder for Scanning via Terminal
+
     #----------------------------
     #-----Test Network Share-----
     #----------------------------
