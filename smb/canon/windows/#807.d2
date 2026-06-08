@@ -1,0 +1,33 @@
+Scan to Folder #809 error on Windows\n-\nYou do not have access privileges for the specified directory.: {class: note}
+classes: {
+    step: {shape: rectangle}
+    diagnose: {shape: diamond}
+    fixed: {shape: rectangle; style: {fill: "#90FF90"; stroke: "#00A000";}}
+    failure: {shape: rectangle; style: {fill: "#FF9090"; stroke: "#A00000";}}
+    note: {shape: page;}
+}
+
+1: Your user account specified for the SMB share doesn't have Full Control over the remote directory {class: fixed}
+1-1: |md
+1. Open File Explorer
+2. Right click on folder and click "Properties"
+3. Click "Sharing" tab and Click "Advanced Sharing"
+4. Check "Share this folder"
+5. Click "Permissions"
+6. Click "Add"
+7. In the text box input the username for the network share
+8. Press "Check Names"
+9. Press "OK"
+10. Check "Full Control" underneath "Allow"
+11. Click "Apply"
+12. Click "OK"
+13. Click "Apply"
+14. Click "OK"
+15. Click "Share"
+16. Click the dropdown and select the same user as step 7
+17. If user is not "Owner" Select "Read/Write" as Permission Level
+18. Click "Share"
+19. Click "Done"
+20. Click "Close"
+| {class: note}
+1 -> 1-1
