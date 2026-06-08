@@ -1,0 +1,10 @@
+Scan to Folder #407 error on Windows\n-\nThe length of the full path to the specified file (or folder) exceeds the maximum supported length.: {class: note}
+classes: {
+    step: {shape: rectangle}
+    diagnose: {shape: diamond}
+    fixed: {shape: rectangle; style: {fill: "#90FF90"; stroke: "#00A000";}}
+    failure: {shape: rectangle; style: {fill: "#FF9090"; stroke: "#A00000";}}
+    note: {shape: page;}
+}
+
+1: Reduce the file name so that the complete file path length is less then 256 characters{class: fixed}
