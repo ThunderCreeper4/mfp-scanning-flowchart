@@ -1,0 +1,38 @@
+Scan to Email 1102 error on Gmail SMTP Server\n-\nLogin to the host has failed.: {class: note}
+classes: {
+    step: {shape: rectangle}
+    diagnose: {shape: diamond}
+    fixed: {shape: rectangle; style: {fill: "#90FF90"; stroke: "#00A000";}}
+    failure: {shape: rectangle; style: {fill: "#FF9090"; stroke: "#A00000";}}
+    note: {shape: page;}
+}
+
+#Bad Password
+1: The Gmail account password has been changed, the App Password has been deleted, or 2-step Verification was turned off\nVerify 2FA Access and Generate a new App Password {class: fixed}
+
+#Verify 2FA Access
+1-1: |md
+    1. Open gmail.com and login
+    2. Click the profile picture on the top left and select "Manage your Google Account"
+    3. Select "Security & sign-in"
+    4. "2-Step Verification" will say "on since MM DD, YYYY" if enabled
+| {class: note}
+1 -> 1-1: How to check 2FA Access
+
+#Generate App Password
+1-2: |md
+    1. Open gmail.com and login
+    2. Click the profile picture on the top left and select "Manage your Google Account"
+    3. At the Search Bar (Search Google Account), Search for "App passwords" and click on App passwords (security)
+    4. Put anything into the "App Name" box and click "Create" 
+    5. Note 16-charactor string shown
+| {class: note}
+1 -> 1-2: How to generate App Password
+
+#Update Password
+1-3: |md
+    1. Open Command Centre RX
+    2. Select "Function Settings" then select "E-mail"
+    3. Select "Login Password" and put in the password\nto the email account and click "Submit"
+| {class: note}
+1 -> 1-3: How to update Password in device
