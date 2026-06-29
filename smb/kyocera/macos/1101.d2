@@ -1,0 +1,61 @@
+Scan to Folder 1101 error on macos\n-\nSMB protocol is not enabled.: {class: note}
+classes: {
+    step: {shape: rectangle}
+    diagnose: {shape: diamond}
+    fixed: {shape: rectangle; style: {fill: "#90FF90"; stroke: "#00A000";}}
+    failure: {shape: rectangle; style: {fill: "#FF9090"; stroke: "#A00000";}}
+    note: {shape: page;}
+}
+
+#Verify Correct Hostname
+1: Can you ping the target\nMAC by its hostname?\n"ping (hostname)"? {class: diagnose}
+
+#---------------------------------
+#-----CANNOT PING BY HOSTNAME-----
+#---------------------------------
+
+2: Can't ping MAC by hostname
+1 -> 2: Yes
+2: {
+    #-------------------------------------
+    #-----Test for Duplicate Hostname-----
+    #-------------------------------------
+    2-1: Take target MAC offline\nAttempt "ping (hostname)"\nDoes the ping still work? {class: diagnose}
+    2-1-1: There is another MAC device that shares the same hostname as the target MAC.\nAdvise end user to change hostname of MAC from default\nor configure the scanning via IP address and warn end user of risks of using IP Address without a Reservation {class: failure}
+    2-1 -> 2-1-1: Yes
+
+    #-------------------------------------
+    #-----Unable to Resolve Presently-----
+    #-------------------------------------
+    2-1-2: Unable to resolve source of hostname resolution\nConfigure the scanning via IP address, advise to implement an IP Reservation {class: failure}
+    2-1 -> 2-1-2: No
+}
+
+#------------------------------
+#-----CAN PING BY HOSTNAME-----
+#------------------------------
+3: Can ping by hostname
+1 -> 3: No
+3: {
+    #---------------------------------
+    #-----Verify Sharing Settings-----
+    #---------------------------------
+    3-1: Verify "File Sharing" is enabled {class: step}
+    3-1-1: |md
+        1. Open "System Preferences"
+        2. Select "Sharing"
+        3. Check "File Sharing"
+        | {class: note}
+    3-1 -> 3-1-1: How to Verify
+
+    3-2: Verify "Windows File Sharing" is enabled {class: step}
+    3-1 -> 3-2: File Sharing is on
+    3-2-1: |md
+        1. Open "System Preferences"
+        2. Select "Sharing"
+        3. Select "File Sharing"
+        4. Select "Options..."
+        5. Select the box corresponding to the login user
+        | {class: note}
+    3-1 -> 3-2-1: How to Verify
+}
