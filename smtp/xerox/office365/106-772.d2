@@ -1,0 +1,11 @@
+Scan to Email 016-772 error on Office365 SMTP Server\n-\nDNS server unsets up in SMTP.: {class: note}
+classes: {
+    step: {shape: rectangle}
+    diagnose: {shape: diamond}
+    fixed: {shape: rectangle; style: {fill: "#90FF90"; stroke: "#00A000";}}
+    failure: {shape: rectangle; style: {fill: "#FF9090"; stroke: "#A00000";}}
+    note: {shape: page;}
+}
+
+#Invalid DNS Server
+1: The DNS Server Specified is either invalid or unresponsive\nUpdate DNS to Google Public DNS or similar {class: fixed}
