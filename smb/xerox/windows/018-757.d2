@@ -1,0 +1,57 @@
+Scan to Folder 018-757 error on Windows\n-\nHost name solution error in SMB.: {class: note}
+classes: {
+    step: {shape: rectangle}
+    diagnose: {shape: diamond}
+    fixed: {shape: rectangle; style: {fill: "#90FF90"; stroke: "#00A000";}}
+    failure: {shape: rectangle; style: {fill: "#FF9090"; stroke: "#A00000";}}
+    note: {shape: page;}
+}
+
+#Check for Private Network
+1: Verify the device is set to \n"Private Network" {class: step}
+
+#Windows 11 
+1-1: |md
+1. Press Start Key
+2. Select "Settings"
+3. Select "Network & Internet"
+4. Select either "Wi-Fi" or "Ethernet"
+5. Under "Network profile type", select "Private network"
+| {class: note}
+1 -> 1-1: Windows 11
+
+#Windows 10
+1-2: |md
+1. Press Start Key
+2. Press "Settings"
+3. Press "Network & Internet"
+4. Select "Properties" button for either "Wi-Fi" or "Ethernet"
+5. Select "Private" under "Network profile"
+| {class: note}
+1 -> 1-2: Windows 10
+
+#Check for File and printer sharing
+2: Verify "File and printer sharing" is enabled {class: step}
+1 -> 2: Verified Private Network is selected
+
+#Windows 11
+2-1: |md
+1. Press Start Key
+2. Select "Settings"
+3. Select "Network & Internet"
+4. Select "Advanced network settings"
+5. Select "Advanced sharing settings"
+6. In the section for "Private networks", enable "File and printer sharing"
+| {class: note}
+2 -> 2-1: Windows 11
+
+#Windows 10
+2-2: |md
+1. Press Start Key
+2. Press "Settings"
+3. Press "Network & Internet"  
+4. Select "Network and Sharing Center"
+5. Select "Change advanced sharing settings"
+6. In the section for "Private networks", enable "file and printer sharing"
+| {class: note}
+2 -> 2-2: Windows 10
